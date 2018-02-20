@@ -10,7 +10,7 @@ var randomPic = 0;
 var randomProduct1 = 0;
 var randomProduct2 = 0;
 var randomProduct3 = 0;
-var compareProducts = [null, null, null];
+// var compareProducts = [null, null, null];
 
 //array to store objects
 
@@ -65,7 +65,7 @@ function clickOnProducts() {
   randomProduct1 = randomPic;
   Product.allProducts[randomProduct1].clicks++;
   Product.allProducts[randomProduct1].views++;
-  compareProducts[0];
+//   compareProducts.push(randomPic);
   randomGenerator();
 
   if(randomPic === randomProduct1) {
@@ -77,7 +77,7 @@ function clickOnProducts() {
     Product.allProducts[randomProduct2].clicks++;
     Product.allProducts[randomProduct2].views++;
     randomProduct2 = randomPic;
-    compareProducts[1];
+    // compareProducts.push(randomPic);
   }
   randomGenerator();
 
@@ -90,7 +90,7 @@ function clickOnProducts() {
     Product.allProducts[randomProduct3].clicks++;
     Product.allProducts[randomProduct3].views++;
     randomProduct3 = randomPic;
-    compareProducts[2];
+    // compareProducts.push(randomPic);
   }
 
   randomGenerator();
@@ -100,6 +100,15 @@ function clickOnProducts() {
     productsPics.removeEventListener('click', clickOnProducts);
   }
 }
+
+// do {
+//   var uniquePic = true;
+//   for ( var i = 0; i < compareProducts.length; i++) {
+//       if compareProducts[i] === randomPic {
+//           uniquePic = false;
+//       }
+//   }
+// } while (randomGenerator = false);
 
 clickOnProducts();
 randomGenerator();
