@@ -153,7 +153,6 @@ function drawChart () {
     type: 'bar',
     data: data,
     options: {
-      responsive: false,
       scales: {
         yAxes: [{
           ticks: {
