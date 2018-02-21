@@ -1,8 +1,45 @@
-li {
+* {
+    font-family: Helvetica;
+}
+body {
+    background-color: rgb(203, 158, 245);
+}
+
+
+h1 {
+    text-align: center;
+    color: darkblue;
+    font-size: 40px;
+    margin: 50px;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 15px;
+}
+
+p {
+    font-size: 20px;
+    margin: 30px 15px 0px 15px;
+    text-align: center;
+    color: yellow;
+}
+
+#product-pics {
     display: inline-block;
 }
 
 img {
-    width: 300px;
-    height: 300px;
+    border: 6px solid blue;
+    border-radius: 20px;
+    max-height: 200px;
+    max-width: 25%;
+    margin: 1.5%;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+#voting-chart {
+    margin-top: 100px;
+    margin-left: 200px;
 }

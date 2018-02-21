@@ -118,7 +118,7 @@ function updateProductArrays () {
 var data = {
   labels: Product.names,
   datasets: [{
-    label: '# of votes',
+    // label: '# of votes',
     data: Product.clicks,
     backgroundColor: [
       'pink',
@@ -135,10 +135,10 @@ var data = {
       'yellow',
       'violet',
       'gray',
-      'amber',
+      'lime',
       'fuchsia',
       'crimson',
-      'deep purple',
+      'black',
       'gold',
       'brown'
     ],
@@ -150,7 +150,7 @@ function drawChart () {
   var ctx = document.getElementById('voting-chart').getContext('2d');
   console.log(data);
   Product.productChart = new Chart(ctx, {
-    type: 'pie',
+    type: 'polarArea',
     data: data,
     options: {
       responsive: false,
