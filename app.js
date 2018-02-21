@@ -1,17 +1,20 @@
 'use strict';
 
-//global variables
+//Variable Declarations
 
 Product.allThreePics = document.getElementById('products-pics');
 Product.pics = [document.getElementById('product-pic1'), document.getElementById('product-pic2'),document.getElementById('product-pic3')];
 Product.list = document.getElementById('productlist');
+Product.productChart;
+Product.chartDrawn = false;
 
-//array to store objects
+//Arrays
 
 Product.allProducts = [];
 Product.compareProducts = [];
+Product.clicks = [];
 
-//make an object
+//Constructor Function
 
 function Product (name, filepath) {
   this.name = name;
@@ -21,7 +24,7 @@ function Product (name, filepath) {
   Product.allProducts.push(this);
 }
 
-//make new image instances
+//Instances
 
 Product.names = ['R2D2 Luggage', 'Banana Cutter', 'Bathroom Tablet Holder', 'Open Toed Rain Boots', 'All-In-One Breakfast', 'Meatball Bubblegum', 'Reverse Chair', 'Cthulhu Action Figure', 'Doggy Duck Nose', 'Dragon Meat', 'Pen Utencil', 'Pet Sweeper', 'Pizza Scissors', 'Shark Sleeping Bag', 'Baby Sweeper', 'Tauntaun Sleeping Bag', 'Unicorn Meat', 'USB Tentacle', 'Self Watering Can', 'Wine Glass'];
 
@@ -46,13 +49,15 @@ new Product(Product.names[17], 'img/usb.gif');
 new Product(Product.names[18], 'img/water-can.jpg');
 new Product(Product.names[19], 'img/wine-glass.jpg');
 
-//function to randomly display images
+//Function Declarations
+
+//randomly display images
 
 function randomGenerator () {
   return Math.floor(Math.random() * Product.names.length);
 }
 
-//create display
+//display images
 
 function displayPics () {
   while (Product.compareProducts.length < 6) {
@@ -71,11 +76,11 @@ function displayPics () {
   }
 }
 
-//create handler
+//click handler
 
 Product.totalClicks = 0;
 
-function clickOnProducts(event) {
+function clickOnProducts (event) {
   if (event.target === Product.allThreePics) {
     return alert('You must click on an image.');
   }
@@ -84,7 +89,8 @@ function clickOnProducts(event) {
   if (Product.totalClicks > 24) {
     Product.allThreePics.removeEventListener('click', clickOnProducts);
     Product.allThreePics.style.display = 'none';
-    showList();
+    updateProductArrays();
+    drawChart();
   }
   Product.totalClicks += 1;
 
@@ -97,27 +103,67 @@ function clickOnProducts(event) {
   displayPics();
 }
 
-//create list
+//update chart
 
-function showList () {
+function updateProductArrays () {
   for (var i = 0; i < Product.allProducts.length; i++) {
-    var liEl = document.createElement('li');
-    var conversion = (Product.allProducts[i].clicks / Product.allProducts[i].views * 100).toFixed(1);
-    liEl.textContent = Product.allProducts[i].name + ' has ' + Product.allProducts[i].clicks + ' votes in ' + Product.allProducts[i].views + ' views for a click-through conversion rate of ' + conversion + '%';
-
-    if (conversion > 49) {
-      liEl.style.color = 'white';
-      liEl.style.backgroundColor = 'green';
-    }
-
-    if (conversion < 30) {
-      liEl.style.color = 'white';
-      liEl.style.backgroundColor = 'red';
-    }
-
-    Product.list.appendChild(liEl);
+    Product.clicks[i] = Product.allProducts[i].clicks;
   }
 }
+
+//Add In The Chart
+//Charts rendered using Chart JS v.2.6.0
+//http://www.chartjs.org
+
+var data = {
+  labels: Product.names,
+  datasets: [{
+    label: '# of votes',
+    data: Product.clicks,
+    backgroundColor: [
+      'pink',
+      'purple',
+      'red',
+      'blue',
+      'orange',
+      'tan',
+      'navy',
+      'bisque',
+      'darkgray',
+      'burlywood',
+      'lightblue',
+      'yellow',
+      'violet',
+      'gray',
+      'amber',
+      'fuchsia',
+      'crimson',
+      'deep purple',
+      'gold',
+      'brown'
+    ],
+    hoverBackgroundColor: 'green'
+  }]
+};
+
+function drawChart () {
+  var ctx = document.getElementById('voting-chart').getContext('2d');
+  console.log(data);
+  Product.productChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 3000,
+        easing: 'easeOutBounce'
+      },
+    }
+  });
+  Product.chartDrawn = true;
+}
+
+//Execution, Event Listeners
 
 displayPics();
 Product.allThreePics.addEventListener('click', clickOnProducts);
