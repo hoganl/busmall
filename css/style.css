@@ -9,37 +9,37 @@ body {
 h1 {
     text-align: center;
     color: darkblue;
+    background-color: yellow;
+    border: 6px solid blue;
+    border-radius: 20px;
     font-size: 40px;
     margin: 50px;
+    padding: 20px;
 }
 
 h2 {
     font-size: 30px;
     margin: 15px;
+    text-align: center;
 }
 
 p {
     font-size: 20px;
-    margin: 30px 15px 0px 15px;
     text-align: center;
-    color: yellow;
+    margin: 20px;
 }
 
-#product-pics {
+#products-pics {
     display: inline-block;
 }
 
 img {
     border: 6px solid blue;
+    background-color: yellow;
     border-radius: 20px;
-    max-height: 200px;
-    max-width: 25%;
-    margin: 1.5%;
+    height: 200px;
+    width: 200px;
+    padding: 50px;
     margin-top: 100px;
     margin-left: 100px;
-}
-
-#voting-chart {
-    margin-top: 100px;
-    margin-left: 200px;
 }

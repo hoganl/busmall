@@ -26,7 +26,7 @@ function Product (name, filepath) {
 
 //Instances
 
-Product.names = ['R2D2 Luggage', 'Banana Cutter', 'Bathroom Tablet Holder', 'Open Toed Rain Boots', 'All-In-One Breakfast', 'Meatball Bubblegum', 'Reverse Chair', 'Cthulhu Action Figure', 'Doggy Duck Nose', 'Dragon Meat', 'Pen Utencil', 'Pet Sweeper', 'Pizza Scissors', 'Shark Sleeping Bag', 'Baby Sweeper', 'Tauntaun Sleeping Bag', 'Unicorn Meat', 'USB Tentacle', 'Self Watering Can', 'Wine Glass'];
+Product.names = ['R2D2', 'Banana Cutter', 'Bathroom', 'Rain Boots', 'Breakfast', 'Bubblegum', 'Reverse Chair', 'Cthulhu', 'Doggy Duck Nose', 'Dragon Meat', 'Pen Utencil', 'Pet Sweeper', 'Pizza Scissors', 'Shark Sleeping Bag', 'Baby Sweeper', 'Tauntaun', 'Unicorn Meat', 'USB Tentacle', 'Self Watering Can', 'Wine Glass'];
 
 new Product(Product.names[0], 'img/bag.jpg');
 new Product(Product.names[1], 'img/banana.jpg');
@@ -78,7 +78,7 @@ function displayPics () {
 
 //click handler
 
-Product.totalClicks = 0;
+Product.totalClicks = 1;
 
 function clickOnProducts (event) {
   if (event.target === Product.allThreePics) {
@@ -118,7 +118,7 @@ function updateProductArrays () {
 var data = {
   labels: Product.names,
   datasets: [{
-    // label: '# of votes',
+    label: 'Voting Results',
     data: Product.clicks,
     backgroundColor: [
       'pink',
@@ -148,19 +148,21 @@ var data = {
 
 function drawChart () {
   var ctx = document.getElementById('voting-chart').getContext('2d');
-  console.log(data);
+
   Product.productChart = new Chart(ctx, {
-    type: 'polarArea',
+    type: 'bar',
     data: data,
     options: {
       responsive: false,
-      animation: {
-        duration: 3000,
-        easing: 'easeOutBounce'
-      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
   });
-  Product.chartDrawn = true;
 }
 
 //Execution, Event Listeners
