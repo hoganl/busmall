@@ -29,7 +29,6 @@ function Product (name, filepath) {
 
 //moved to localStorage
 
-
 //Function Declarations
 
 //randomly display images
