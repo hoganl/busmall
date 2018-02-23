@@ -13,6 +13,7 @@ Product.chartDrawn = false;
 Product.allProducts = [];
 Product.compareProducts = [];
 Product.clicks = [];
+Product.names = ['r2d2', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'duck-nose', 'dragon-meat', 'pen', 'pet-sweep', 'scissors', 'shark', 'baby-sweep', 'tauntaun', 'unicorn-meat', 'tentacle', 'watering-can', 'wine-glass'];
 
 //Constructor Function
 
@@ -26,28 +27,8 @@ function Product (name, filepath) {
 
 //Instances
 
-Product.names = ['R2D2', 'Banana Cutter', 'Bathroom', 'Rain Boots', 'Breakfast', 'Bubblegum', 'Reverse Chair', 'Cthulhu', 'Doggy Duck Nose', 'Dragon Meat', 'Pen Utencil', 'Pet Sweeper', 'Pizza Scissors', 'Shark Sleeping Bag', 'Baby Sweeper', 'Tauntaun', 'Unicorn Meat', 'USB Tentacle', 'Self Watering Can', 'Wine Glass'];
+//moved to localStorage
 
-new Product(Product.names[0], 'img/bag.jpg');
-new Product(Product.names[1], 'img/banana.jpg');
-new Product(Product.names[2], 'img/bathroom.jpg');
-new Product(Product.names[3], 'img/boots.jpg');
-new Product(Product.names[4], 'img/breakfast.jpg');
-new Product(Product.names[5], 'img/bubblegum.jpg');
-new Product(Product.names[6], 'img/chair.jpg');
-new Product(Product.names[7], 'img/cthulhu.jpg');
-new Product(Product.names[8], 'img/dog-duck.jpg');
-new Product(Product.names[9], 'img/dragon.jpg');
-new Product(Product.names[10], 'img/pen.jpg');
-new Product(Product.names[11], 'img/pet-sweep.jpg');
-new Product(Product.names[12], 'img/scissors.jpg');
-new Product(Product.names[13], 'img/shark.jpg');
-new Product(Product.names[14], 'img/sweep.png');
-new Product(Product.names[15], 'img/tauntaun.jpg');
-new Product(Product.names[16], 'img/unicorn.jpg');
-new Product(Product.names[17], 'img/usb.gif');
-new Product(Product.names[18], 'img/water-can.jpg');
-new Product(Product.names[19], 'img/wine-glass.jpg');
 
 //Function Declarations
 
@@ -78,7 +59,7 @@ function displayPics () {
 
 //click handler
 
-Product.totalClicks = 1;
+Product.totalClicks = 0;
 
 function clickOnProducts (event) {
   if (event.target === Product.allThreePics) {
@@ -86,11 +67,12 @@ function clickOnProducts (event) {
   }
   // console.log(Product.totalClicks, 'total clicks');
 
-  if (Product.totalClicks > 24) {
+  if (Product.totalClicks >= 24) {
     Product.allThreePics.removeEventListener('click', clickOnProducts);
     Product.allThreePics.style.display = 'none';
     updateProductArrays();
     drawChart();
+    localStorage.setItem('productsArray', JSON.stringify(Product.allProducts));
   }
   Product.totalClicks += 1;
 
@@ -165,6 +147,32 @@ function drawChart () {
 }
 
 //Execution, Event Listeners
+
+if (localStorage !== null) {
+  var retrieveData = localStorage.getItem('productsArray');
+  Product.allProducts = JSON.parse(retrieveData);
+} else {
+  new Product(Product.names[0], 'img/bag.jpg');
+  new Product(Product.names[1], 'img/banana.jpg');
+  new Product(Product.names[2], 'img/bathroom.jpg');
+  new Product(Product.names[3], 'img/boots.jpg');
+  new Product(Product.names[4], 'img/breakfast.jpg');
+  new Product(Product.names[5], 'img/bubblegum.jpg');
+  new Product(Product.names[6], 'img/chair.jpg');
+  new Product(Product.names[7], 'img/cthulhu.jpg');
+  new Product(Product.names[8], 'img/dog-duck.jpg');
+  new Product(Product.names[9], 'img/dragon.jpg');
+  new Product(Product.names[10], 'img/pen.jpg');
+  new Product(Product.names[11], 'img/pet-sweep.jpg');
+  new Product(Product.names[12], 'img/scissors.jpg');
+  new Product(Product.names[13], 'img/shark.jpg');
+  new Product(Product.names[14], 'img/sweep.png');
+  new Product(Product.names[15], 'img/tauntaun.jpg');
+  new Product(Product.names[16], 'img/unicorn.jpg');
+  new Product(Product.names[17], 'img/usb.gif');
+  new Product(Product.names[18], 'img/water-can.jpg');
+  new Product(Product.names[19], 'img/wine-glass.jpg');
+}
 
 displayPics();
 Product.allThreePics.addEventListener('click', clickOnProducts);
