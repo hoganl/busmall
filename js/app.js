@@ -62,7 +62,7 @@ function clickOnProducts (event) {
   }
   // console.log(Product.totalClicks, 'total clicks');
 
-  if (Product.totalClicks > 24) {
+  if (Product.totalClicks >= 24) {
     Product.allThreePics.removeEventListener('click', clickOnProducts);
     Product.allThreePics.style.display = 'none';
     updateProductArrays();
@@ -147,6 +147,7 @@ if (localStorage !== null) {
   var retrieveData = localStorage.getItem('productsArray');
   Product.allProducts = JSON.parse(retrieveData);
 } else {
+
   new Product(Product.name[0], 'img/bag.jpg');
   new Product(Product.name[1], 'img/banana.jpg');
   new Product(Product.name[2], 'img/bathroom.jpg');
@@ -168,5 +169,6 @@ if (localStorage !== null) {
   new Product(Product.name[18], 'img/water-can.jpg');
   new Product(Product.name[19], 'img/wine-glass.jpg');
 }
+
 displayPics();
 Product.allThreePics.addEventListener('click', clickOnProducts);
