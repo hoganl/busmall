@@ -143,7 +143,7 @@ function drawChart () {
 
 //Execution, Event Listeners
 
-if (localStorage !== null) {
+if (localStorage.getItem('productsArray')) {
   var retrieveData = localStorage.getItem('productsArray');
   Product.allProducts = JSON.parse(retrieveData);
 } else {
