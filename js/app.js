@@ -61,14 +61,6 @@ function clickOnProducts (event) {
     return alert('You must click on an image.');
   }
   // console.log(Product.totalClicks, 'total clicks');
-
-  if (Product.totalClicks >= 24) {
-    Product.allThreePics.removeEventListener('click', clickOnProducts);
-    Product.allThreePics.style.display = 'none';
-    updateProductArrays();
-    drawChart();
-    localStorage.setItem('productsArray', JSON.stringify(Product.allProducts));
-  }
   Product.totalClicks += 1;
 
   for (var i = 0; i < Product.names.length; i++) {
@@ -76,6 +68,14 @@ function clickOnProducts (event) {
       Product.allProducts[i].clicks += 1;
       console.log(event.target.alt + ' has ' + Product.allProducts[i].clicks + ' votes in ' + Product.allProducts[i].views + ' views');
     }
+  }
+
+  if (Product.totalClicks >= 25) {
+    Product.allThreePics.removeEventListener('click', clickOnProducts);
+    Product.allThreePics.style.display = 'none';
+    updateProductArrays();
+    drawChart();
+    localStorage.setItem('productsArray', JSON.stringify(Product.allProducts));
   }
   displayPics();
 }
